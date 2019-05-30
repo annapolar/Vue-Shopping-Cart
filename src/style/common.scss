@@ -22,8 +22,3 @@ body {
 @mixin bxShadow {
   box-shadow: 0 5px 25px 5px rgba(black, 0.2);
 }
-@mixin fixedPos($l, $t) {
-  position: fixed;
-  left: $l;
-  top: $t;
-}

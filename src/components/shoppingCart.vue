@@ -1,5 +1,6 @@
 <template>
   <div class="shoppingCart" @wheel.prevent="wheel">
+    <div class="title">Vue.js Shopping Cart</div>
     <div class="cards">
       <div class="card" v-for="movie in movies">
         <div class="left">
@@ -10,9 +11,13 @@
           <h4>{{movie.type}}</h4>
           <p v-html="movie.description"></p>
           <div class="price">${{movie.price}}</div>
-          <button class="add">+ Add to My Cart</button>
+          <button class="add" @click="addItem(movie)">+ Add to My Cart</button>
         </div>
       </div>
+    </div>
+    <div class="fix-control">
+      <i class="fas fa-shopping-cart"></i>
+      <span>{{cart.length}}</span>
     </div>
   </div>
 </template>
@@ -24,7 +29,8 @@ import { TweenMax } from "gsap/TweenMax";
 export default {
   data() {
     return {
-      movies: []
+      movies: [],
+      cart: []
     };
   },
   created() {
@@ -32,7 +38,6 @@ export default {
       .get("https://awiclass.monoame.com/api/command.php?type=get&name=movies")
       .then(res => {
         this.movies = res.data;
-     
       });
   },
   methods: {
@@ -45,8 +50,12 @@ export default {
     },
     wheel(e) {
       TweenMax.to(".cards", 0.8, {
-        left: "+=" + e.deltaY*2 + "px"
+        left: "+=" + e.deltaY * 2 + "px"
       });
+    },
+    addItem(movie) {
+      this.cart.push(movie);
+      console.log(this.cart);
     }
   }
 };
@@ -58,7 +67,15 @@ export default {
 
 .shoppingCart {
   flex: 1;
-  border: 2px solid yellow;
+
+  .title {
+    position: fixed;
+    top: 20px;
+    left: 40px;
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+  }
 
   .cards {
     @include flexCenter;
@@ -146,6 +163,17 @@ export default {
           }
         }
       }
+    }
+  }
+  .fix-control {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 26px;
+    span{
+      font-size:15px;
+      margin-left:10px;
     }
   }
 }
