@@ -10,6 +10,7 @@
           <h4>{{movie.type}}</h4>
           <p v-html="movie.description"></p>
           <div class="price">${{movie.price}}</div>
+          <button class="add">Add to Cart</button>
         </div>
       </div>
     </div>
@@ -46,14 +47,17 @@ export default {
 </script>
 
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
+@import '../style/common.scss';
+
 .shoppingCart {
   .cards {
    .card{
      .left{
        .cover{
          width:180px;
-         height:300px;
+         height:250px;
+         @include bxShadow
        }
      }
      .right{

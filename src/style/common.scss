@@ -1,0 +1,26 @@
+* {
+  vertical-align: center;
+  outline: none;
+}
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
+}
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin bxShadow {
+  box-shadow: 0 5px 25px 5px rgba(black, 0.2);
+}
+@mixin fixedPos($l, $t) {
+  position: fixed;
+  left: $l;
+  top: $t;
+}
