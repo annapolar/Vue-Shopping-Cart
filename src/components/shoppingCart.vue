@@ -1,5 +1,5 @@
 <template>
-  <div class="shoppingCart">
+  <div class="shoppingCart" @wheel.prevent="wheel">
     <div class="cards">
       <div class="card" v-for="movie in movies">
         <div class="left">
@@ -19,6 +19,7 @@
 
 <script>
 import axios from "axios";
+import { TweenMax } from "gsap/TweenMax";
 
 export default {
   data() {
@@ -31,7 +32,7 @@ export default {
       .get("https://awiclass.monoame.com/api/command.php?type=get&name=movies")
       .then(res => {
         this.movies = res.data;
-        console.table(this.movies);
+     
       });
   },
   methods: {
@@ -41,6 +42,11 @@ export default {
         "background-position": "center center",
         "background-size": "cover"
       };
+    },
+    wheel(e) {
+      TweenMax.to(".cards", 0.8, {
+        left: "+=" + e.deltaY*2 + "px"
+      });
     }
   }
 };
@@ -51,11 +57,18 @@ export default {
 @import "../style/common.scss";
 
 .shoppingCart {
+  flex: 1;
+  border: 2px solid yellow;
+
   .cards {
     @include flexCenter;
     justify-content: left;
     height: 100%;
     margin: 0 20vw;
+    position: relative;
+    transition: 0.5s, left 0s;
+    left: 0;
+    border: 2px solid green;
 
     .card {
       margin: 60px;
@@ -89,7 +102,7 @@ export default {
           border-radius: 5px;
           position: relative;
           top: -50px;
-          transition:0.5s;
+          transition: 0.5s;
         }
       }
       .right {

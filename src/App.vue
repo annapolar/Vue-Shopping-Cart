@@ -15,11 +15,11 @@ export default {
 @import "./style/common.scss";
 
 #app {
+  background-color: #111;
   font-family: "Lato", sans-serif;
   @include size(100%);
-  background-color: #111;
-  @include flexCenter;
-  justify-content: left;
+  display: flex;
+  
   .title{
     color:white;
     position: fixed;
