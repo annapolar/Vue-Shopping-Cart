@@ -1,23 +1,22 @@
 <template>
   <div id="app">
+    <h1>Vue.js Shopping Cart</h1>
     <shoppingCart/>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'app'
-}
+  name: "app"
+};
 </script>
 
 <style lang="scss">
-@import './style/common.scss';
+@import "./style/common.scss";
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Lato", sans-serif;
   @include size(100%);
-  background-color: #111;  
-  color:white;
+  background-color: #111;
 }
 </style>
