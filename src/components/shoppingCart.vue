@@ -57,10 +57,16 @@ export default {
       this.cart.push(movie);
       console.log(this.cart);
     }
+  },
+  watch: {
+    cart() {
+      TweenMax.from(".fa-shopping-cart", 0.3, {
+        scale: 0.5
+      });
+    }
   }
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import "../style/common.scss";
@@ -171,9 +177,9 @@ export default {
     right: 40px;
     color: white;
     font-size: 26px;
-    span{
-      font-size:15px;
-      margin-left:10px;
+    span {
+      font-size: 15px;
+      margin-left: 10px;
     }
   }
 }
