@@ -27,6 +27,7 @@
 <script>
 import axios from "axios";
 import { TweenMax } from "gsap/TweenMax";
+import { setTimeout } from 'timers';
 
 export default {
   data() {
@@ -56,12 +57,14 @@ export default {
       });
     },
     addItem(movie, e) {
-      this.cart.push(movie);
       
       TweenMax.from(".buybox", 0.8, {
         left: e.pageX - 50,
         top: e.pageY 
       });
+      setTimeout(()=>{
+         this.cart.push(movie);
+      },800)
     }
   },
   watch: {
