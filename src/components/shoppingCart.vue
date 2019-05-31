@@ -20,20 +20,20 @@
       <i class="fas fa-shopping-cart"></i>
       <span>{{cart.length}}</span>
     </div>
-    <div class="buybox"></div>
+    <div class="buybox" :style="bgcss(currentMovie.cover)" v-if="currentMovie"></div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { TweenMax } from "gsap/TweenMax";
-import { setTimeout } from 'timers';
 
 export default {
   data() {
     return {
       movies: [],
-      cart: []
+      cart: [],
+      currentMovie: null
     };
   },
   created() {
@@ -57,14 +57,19 @@ export default {
       });
     },
     addItem(movie, e) {
-      
-      TweenMax.from(".buybox", 0.8, {
-        left: e.pageX - 50,
-        top: e.pageY 
+      this.currentMovie = movie;
+
+      this.$nextTick(() => {
+        // After DOM is updated, then execute this animation
+        TweenMax.from(".buybox", 0.8, {
+          left: e.pageX - 50,
+          top: e.pageY,
+          opacity: 1
+        });
+        setTimeout(() => {
+          this.cart.push(movie);
+        }, 800);
       });
-      setTimeout(()=>{
-         this.cart.push(movie);
-      },800)
     }
   },
   watch: {
@@ -192,11 +197,10 @@ export default {
   }
   .buybox {
     @include size(50px, 80px);
-    background-color: yellowgreen;
     position: fixed;
     right: 30px;
     top: 30px;
-    // opacity:0;
+    opacity: 0;
   }
 }
 </style>

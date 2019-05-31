@@ -18,5 +18,6 @@ export default {
   font-family: "Lato", sans-serif;
   @include size(100%);
   display: flex;
+  overflow: hidden;
 }
 </style>
