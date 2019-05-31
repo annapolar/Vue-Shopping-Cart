@@ -11,7 +11,8 @@
           <h4>{{movie.type}}</h4>
           <p v-html="movie.description"></p>
           <div class="price">${{movie.price}}</div>
-          <button class="add" @click="addItem(movie)">+ Add to My Cart</button>
+          <button class="add" @click.prevent="addItem(movie,$event)">+ Add to My Cart</button>
+          <!-- $event is the original DOM event -->
         </div>
       </div>
     </div>
@@ -19,6 +20,7 @@
       <i class="fas fa-shopping-cart"></i>
       <span>{{cart.length}}</span>
     </div>
+    <div class="buybox"></div>
   </div>
 </template>
 
@@ -53,9 +55,13 @@ export default {
         left: "+=" + e.deltaY * 2 + "px"
       });
     },
-    addItem(movie) {
+    addItem(movie, e) {
       this.cart.push(movie);
-      console.log(this.cart);
+      
+      TweenMax.from(".buybox", 0.8, {
+        left: e.pageX - 50,
+        top: e.pageY 
+      });
     }
   },
   watch: {
@@ -91,7 +97,6 @@ export default {
     position: relative;
     transition: 0.5s, left 0s;
     left: 0;
-    border: 2px solid green;
 
     .card {
       margin: 60px;
@@ -181,6 +186,14 @@ export default {
       font-size: 15px;
       margin-left: 10px;
     }
+  }
+  .buybox {
+    @include size(50px, 80px);
+    background-color: yellowgreen;
+    position: fixed;
+    right: 30px;
+    top: 30px;
+    // opacity:0;
   }
 }
 </style>
