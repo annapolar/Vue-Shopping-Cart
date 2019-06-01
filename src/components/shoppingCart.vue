@@ -167,18 +167,26 @@ export default {
         .price {
           display: inline-block;
           margin-right: 20px;
+          font-size: 18px;
         }
         button {
-          padding: 5px 10px;
-          background-color: #bbb;
-          color: rgba(white, 0.9);
+          padding: 7px 12px;
           border-radius: 50px;
           cursor: pointer;
+          color: rgba(white, 0.9);
+          background-image: linear-gradient(
+            to right,
+            #f95e5e 0%,
+            #ffa58a 51%,
+            #f95e5e 100%
+          );
+          background-size: 200% auto;
           transition: 0.5s;
           border: none;
+          font-size: 12px;
           &:hover {
             color: white;
-            background-color: #f95e5e;
+            background-position: right center;
           }
         }
       }

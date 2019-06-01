@@ -14,7 +14,7 @@ export default {
 @import "./style/common.scss";
 
 #app {
-  background-color: #111;
+  background-image: linear-gradient(to bottom, #1b1d22, #2b303a);
   font-family: "Lato", sans-serif;
   @include size(100%);
   display: flex;
