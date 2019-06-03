@@ -1,29 +1,5 @@
 # vue-dvd-shopping-cart
 
-## Project setup
-```
-yarn install
-```
+![image](https://user-images.githubusercontent.com/20388192/58836761-e885dc00-8616-11e9-97e6-86400db35443.png)
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![image](https://user-images.githubusercontent.com/20388192/58836831-123f0300-8617-11e9-94ed-41978593ef19.png)
