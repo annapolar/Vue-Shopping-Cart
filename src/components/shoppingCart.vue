@@ -1,6 +1,6 @@
 <template>
   <div class="shoppingCart" @wheel.prevent="wheel">
-    <div class="title">Vue.js Shopping Cart</div>
+    <div class="title">DVD Shopping Cart (Vue.js)</div>
     <div class="cards" :class="{isCartOpen:isCartOpen}">
       <div class="card" v-for="movie in movies">
         <div class="left">
