@@ -1,7 +1,7 @@
 <template>
   <div class="shoppingCart" @wheel.prevent="wheel">
     <div class="title">Vue.js Shopping Cart</div>
-    <div class="cards">
+    <div class="cards" @mousedown="cardsPos($event)">
       <div class="card" v-for="movie in movies">
         <div class="left">
           <div class="cover" :style="bgcss(movie.cover)"></div>
@@ -16,9 +16,26 @@
         </div>
       </div>
     </div>
-    <div class="fix-control">
+    <div class="fix-control" @click="isCartOpen=!isCartOpen">
       <i class="fas fa-shopping-cart"></i>
       <span>{{cart.length}}</span>
+    </div>
+    <div class="cartList" v-if="isCartOpen">
+      <div class="panel">
+        <h2>My Shopping Cart List</h2>
+        <ul>
+          <li v-for="(movie,index) in cart">
+            <div class="thumbnail" :style="bgcss(movie.cover)"></div>
+            <h3>
+              {{movie.name}}
+              <div class="price">${{movie.price}}</div>
+            </h3>
+          </li>
+          <li v-if="!cart.length">
+            <h3>Your Cart is Empty :(</h3>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="buybox" :style="bgcss(currentMovie.cover)" v-if="currentMovie"></div>
   </div>
@@ -33,7 +50,8 @@ export default {
     return {
       movies: [],
       cart: [],
-      currentMovie: null
+      currentMovie: null,
+      isCartOpen: false
     };
   },
   created() {
@@ -70,6 +88,9 @@ export default {
           this.cart.push(movie);
         }, 800);
       });
+    },
+    cardsPos(e) {
+      console.log("cards pos:" + e);
     }
   },
   watch: {
@@ -89,9 +110,7 @@ export default {
   flex: 1;
 
   .title {
-    position: fixed;
-    top: 20px;
-    left: 40px;
+    @include fixPosition(40px, 20px);
     color: white;
     font-size: 30px;
     font-weight: 700;
@@ -105,6 +124,7 @@ export default {
     position: relative;
     transition: 0.5s, left 0s;
     left: 0;
+    // border: 4px solid yellow;
 
     .card {
       margin: 60px;
@@ -198,6 +218,14 @@ export default {
     right: 40px;
     color: white;
     font-size: 26px;
+    z-index: 1000;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover {
+      opacity: 1;
+    }
+
     span {
       font-size: 15px;
       margin-left: 10px;
@@ -209,6 +237,60 @@ export default {
     right: 30px;
     top: 30px;
     opacity: 0;
+  }
+  .cartList {
+    @include size(100%);
+    @include fixPosition(0, 0);
+    @include flexCenter;
+    color: white;
+    background-image: linear-gradient(
+      10deg,
+      #111 0%,
+      #111 50%,
+      rgba(#111,0.4) 100%
+    );
+    padding: 5vw;
+    box-sizing: border-box;
+    .panel {
+      width: 70%;
+      h2 {
+        margin-bottom: 40px;
+      }
+      ul {
+        padding: 0;
+        list-style: none;
+        li {
+          display: flex;
+          margin: 5px 0;
+          padding: 6px 20px;
+          transition: 0.5s;
+          cursor: pointer;
+          border-radius: 5px;
+
+          &:hover {
+            background-color: rgba(white, 0.1);
+            transform: translateY(-10px);
+          }
+
+          h3 {
+            font-size: 17px;
+            display: inline-block;
+            width: 100%;
+            opacity: 0.8;
+            line-height: 1.6;
+
+            .price {
+              float: right;
+            }
+          }
+          .thumbnail {
+            @include size(50px, 70px);
+            display: inline-block;
+            margin-right: 20px;
+          }
+        }
+      }
+    }
   }
 }
 </style>
