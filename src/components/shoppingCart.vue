@@ -22,13 +22,21 @@
     </div>
     <div class="cartList" v-if="isCartOpen">
       <div class="panel">
+        <div class="closePanel" @click="isCartOpen=!isCartOpen">
+          <i class="fas fa-times"></i>
+        </div>
         <h2>My Shopping Cart List</h2>
         <ul>
-          <li v-for="(movie,index) in cart">
+          <li v-for="(movie, index) in cart">
             <div class="thumbnail" :style="bgcss(movie.cover)"></div>
             <h3>
               {{movie.name}}
-              <div class="price">${{movie.price}}</div>
+              <div class="listRight">
+                <div class="price">${{movie.price}}</div>
+                <div class="remove" @click="cart.splice(index, 1)">
+                  <i class="fas fa-trash"></i>
+                </div>
+              </div>
             </h3>
           </li>
           <li v-if="!cart.length">
@@ -247,14 +255,25 @@ export default {
       10deg,
       #111 0%,
       #111 50%,
-      rgba(#111,0.4) 100%
+      rgba(#111, 0.4) 100%
     );
     padding: 5vw;
     box-sizing: border-box;
     .panel {
       width: 70%;
+      position: relative;
+      // background-color: rgba(white, 0.2);
       h2 {
         margin-bottom: 40px;
+      }
+      .closePanel {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        i {
+          font-size: 20px;
+          color: white;
+        }
       }
       ul {
         padding: 0;
@@ -278,9 +297,23 @@ export default {
             width: 100%;
             opacity: 0.8;
             line-height: 1.6;
-
-            .price {
+            .listRight {
               float: right;
+              display: flex;
+
+              .price {
+                margin: 0 20px;
+              }
+              .remove {
+                margin: 0 10px;
+                font-size: 14px;
+                line-height: 2;
+                opacity: 0.6;
+                &:hover {
+                  color: rgb(231, 60, 55);
+                  opacity: 1;
+                }
+              }
             }
           }
           .thumbnail {
