@@ -1,7 +1,7 @@
 <template>
   <div class="shoppingCart" @wheel.prevent="wheel">
     <div class="title">Vue.js Shopping Cart</div>
-    <div class="cards" @mousedown="cardsPos($event)">
+    <div class="cards" :class="{isCartOpen:isCartOpen}">
       <div class="card" v-for="movie in movies">
         <div class="left">
           <div class="cover" :style="bgcss(movie.cover)"></div>
@@ -20,7 +20,7 @@
       <i class="fas fa-shopping-cart"></i>
       <span>{{cart.length}}</span>
     </div>
-    <div class="cartList" v-if="isCartOpen">
+    <div class="cartList" :class="{isCartOpen:isCartOpen}">
       <div class="panel">
         <div class="closePanel" @click="isCartOpen=!isCartOpen">
           <i class="fas fa-times"></i>
@@ -39,10 +39,14 @@
               </div>
             </h3>
           </li>
-          <li v-if="!cart.length">
+          <li v-if="!cart.length" class="empty">
             <h3>Your Cart is Empty :(</h3>
           </li>
         </ul>
+        <div class="totalPrice">
+          Total:
+          <span>${{totalPrice}}</span>
+        </div>
       </div>
     </div>
     <div class="buybox" :style="bgcss(currentMovie.cover)" v-if="currentMovie"></div>
@@ -96,9 +100,6 @@ export default {
           this.cart.push(movie);
         }, 800);
       });
-    },
-    cardsPos(e) {
-      console.log("cards pos:" + e);
     }
   },
   watch: {
@@ -106,6 +107,13 @@ export default {
       TweenMax.from(".fa-shopping-cart", 0.3, {
         scale: 0.5
       });
+    }
+  },
+  computed: {
+    totalPrice() {
+      return this.cart
+        .map(movie => movie.price)
+        .reduce((total, currentPrice) => total + currentPrice, 0);
     }
   }
 };
@@ -133,6 +141,9 @@ export default {
     transition: 0.5s, left 0s;
     left: 0;
     // border: 4px solid yellow;
+    &.isCartOpen {
+      transform: scale(0.8);
+    }
 
     .card {
       margin: 60px;
@@ -259,6 +270,13 @@ export default {
     );
     padding: 5vw;
     box-sizing: border-box;
+    opacity: 0;
+    transition: 0.5s;
+    pointer-events: none;
+    &.isCartOpen {
+      opacity: 1;
+      pointer-events: initial;
+    }
     .panel {
       width: 70%;
       position: relative;
@@ -278,6 +296,9 @@ export default {
       ul {
         padding: 0;
         list-style: none;
+        border-bottom: 1px solid rgba(white, 0.4);
+        padding-bottom: 20px;
+
         li {
           display: flex;
           margin: 5px 0;
@@ -285,6 +306,14 @@ export default {
           transition: 0.5s;
           cursor: pointer;
           border-radius: 5px;
+
+          &.empty {
+            cursor: initial;
+            &:hover {
+              background-color: rgba(white, 0);
+              transform: translateY(0);
+            }
+          }
 
           &:hover {
             background-color: rgba(white, 0.1);
@@ -310,7 +339,7 @@ export default {
                 line-height: 2;
                 opacity: 0.6;
                 &:hover {
-                  color: rgb(231, 60, 55);
+                  color: #f95e5e;
                   opacity: 1;
                 }
               }
@@ -321,6 +350,15 @@ export default {
             display: inline-block;
             margin-right: 20px;
           }
+        }
+      }
+      .totalPrice {
+        padding: 10px 20px;
+        font-size: 20px;
+        span {
+          float: right;
+          margin-right: 50px;
+          letter-spacing: 1.3px;
         }
       }
     }
