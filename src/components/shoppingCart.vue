@@ -2,7 +2,7 @@
   <div class="shoppingCart" @wheel.prevent="wheel">
     <div class="title">DVD Shopping Cart (Vue.js)</div>
     <div class="cards" :class="{isCartOpen:isCartOpen}">
-      <div class="card" v-for="movie in movies">
+      <div class="card" v-for="(movie, index) in movies" :key="index">
         <div class="left">
           <div class="cover" :style="bgcss(movie.cover)"></div>
         </div>
@@ -27,7 +27,7 @@
         </div>
         <h2>My Shopping Cart List</h2>
         <ul>
-          <li v-for="(movie, index) in cart">
+          <li v-for="(movie, index) in cart" :key="index">
             <div class="thumbnail" :style="bgcss(movie.cover)"></div>
             <h3>
               {{movie.name}}
@@ -140,7 +140,6 @@ export default {
     position: relative;
     transition: 0.5s, left 0s;
     left: 0;
-    // border: 4px solid yellow;
     &.isCartOpen {
       transform: scale(0.8);
     }
@@ -280,7 +279,6 @@ export default {
     .panel {
       width: 70%;
       position: relative;
-      // background-color: rgba(white, 0.2);
       h2 {
         margin-bottom: 40px;
       }
