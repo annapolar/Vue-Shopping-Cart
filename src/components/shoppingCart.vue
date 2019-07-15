@@ -124,12 +124,16 @@ export default {
 
 .shoppingCart {
   flex: 1;
+  background: radial-gradient(rgba(#000,0.2) 20%, rgba(rgb(38, 42, 54),0.2) 20%);
+  background-size: 10px 10px;
+  -webkit-animation: bscale 10s infinite linear;
+  animation: bscale 100s infinite linear;
 
   .title {
-    @include fixPosition(40px, 20px);
+    @include fixPosition(50px, 30px);
     color: white;
-    font-size: 30px;
-    font-weight: 700;
+    font-size: 26px;
+    font-weight: 600;
   }
 
   .cards {
@@ -205,10 +209,11 @@ export default {
         .price {
           display: inline-block;
           margin-right: 20px;
-          font-size: 18px;
+          font-size: 22px;
+          color: #444;
         }
         button {
-          padding: 7px 12px;
+          padding: 10px 20px;
           border-radius: 50px;
           cursor: pointer;
           color: rgba(white, 0.9);
@@ -221,7 +226,7 @@ export default {
           background-size: 200% auto;
           transition: 0.5s;
           border: none;
-          font-size: 12px;
+          font-size: 14px;
           &:hover {
             color: white;
             background-position: right center;

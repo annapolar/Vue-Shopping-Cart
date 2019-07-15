@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <shoppingCart/>
+    <shoppingCart />
   </div>
 </template>
 
@@ -14,10 +14,11 @@ export default {
 @import "./style/common.scss";
 
 #app {
-  background-image: linear-gradient(to bottom, #1b1d22, #2b303a);
+  background-image: linear-gradient(to bottom, #15161a, #272e3b);
   font-family: "Lato", sans-serif;
   @include size(100%);
   display: flex;
   overflow: hidden;
+ 
 }
 </style>

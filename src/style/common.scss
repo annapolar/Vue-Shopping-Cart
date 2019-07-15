@@ -20,10 +20,18 @@ body {
   align-items: center;
 }
 @mixin bxShadow {
-  box-shadow: 0 5px 25px 5px rgba(black, 0.2);
+  box-shadow: 0 10px 25px 10px rgba(#0f0f11, 0.4);
 }
 @mixin fixPosition($l, $t) {
   position: fixed;
   left: $l;
   top: $t;
+}
+@keyframes bscale{
+  0%{
+    background-position: 0%;
+  }
+  100%{
+    background-position: 100%;
+  }  
 }
