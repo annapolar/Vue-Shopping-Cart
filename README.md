@@ -1,6 +1,6 @@
 # Shopping Cart (Vue.js)
 
-A personal practice Vue.js side project that I built a shopping cart and using TweenMax for some interaction effects. 
+A self-practice Vue.js side project. Using TweenMax for horizontal scroll interaction.
 
 <a href="https://annapolar.github.io/Vue-Shopping-Cart/" target="_blank">Demo</a>
 
